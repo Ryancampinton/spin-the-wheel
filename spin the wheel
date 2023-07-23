@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Spin the Wheel</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f2f2f2;
+    }
+
+    #wheel {
+      width: 300px;
+      height: 300px;
+      background-color: #fff;
+      border-radius: 50%;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+
+    #spinner {
+      width: 100%;
+      height: 100%;
+      background-color: #e60000;
+      position: absolute;
+      top: 0;
+      left: 0;
+      animation: spin 4s linear;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    .segment {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transform-origin: 50% 100%;
+      clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+    }
+
+    .segment:nth-child(1) {
+      background-color: #ffb3b3;
+      transform: rotate(24deg);
+    }
+
+    .segment:nth-child(2) {
+      background-color: #ffcc80;
+      transform: rotate(48deg);
+    }
+
+    .segment:nth-child(3) {
+      background-color: #ffff8d;
+      transform: rotate(72deg);
+    }
+
+    .segment:nth-child(4) {
+      background-color: #ccff90;
+      transform: rotate(96deg);
+    }
+
+    .segment:nth-child(5) {
+      background-color: #80d8ff;
+      transform: rotate(120deg);
+    }
+
+    .segment:nth-child(6) {
+      background-color: #ff80ab;
+      transform: rotate(144deg);
+    }
+
+    .segment:nth-child(7) {
+      background-color: #d1c4e9;
+      transform: rotate(168deg);
+    }
+
+    .segment:nth-child(8) {
+      background-color: #f8bbd0;
+      transform: rotate(192deg);
+    }
+
+    .segment:nth-child(9) {
+      background-color: #d7ccc8;
+      transform: rotate(216deg);
+    }
+
+    .segment:nth-child(10) {
+      background-color: #c5e1a5;
+      transform: rotate(240deg);
+    }
+
+    .segment:nth-child(11) {
+      background-color: #b0bec5;
+      transform: rotate(264deg);
+    }
+
+    .segment:nth-child(12) {
+      background-color: #b2ff59;
+      transform: rotate(288deg);
+    }
+
+    .segment:nth-child(13) {
+      background-color: #ffcc80;
+      transform: rotate(312deg);
+    }
+
+    .segment:nth-child(14) {
+      background-color: #dce775;
+      transform: rotate(336deg);
+    }
+
+    .segment:nth-child(15) {
+      background-color: #e57373;
+      transform: rotate(360deg);
+    }
+
+    #result {
+      font-size: 20px;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    #spin-button {
+      display: block;
+      margin: 20px auto;
+      width: 100px;
+      height: 40px;
+      font-size: 16px;
+      text-align: center;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="wheel">
+    <div id="spinner"></div>
+    <div class="segment">Eggs</div>
+    <div class="segment">Milk</div>
+    <div class="segment">Flour</div>
+    <div class="segment">Sugar</div>
+    <div class="segment">Butter</div>
+    <div class="segment">Chicken breasts</div>
+    <div class="segment">Garlic</div>
+    <div class="segment">Tomatoes</div>
+    <div class="segment">Onions</div>
+    <div class="segment">Lemon</div>
+    <div class="segment">Avocado</div>
+    <div class="segment">Spinach</div>
+    <div class="segment">Apples</div>
+    <div class="segment">Bananas</div>
+    <div class="segment">Strawberries</div>
+  </div>
+  <button id="spin-button">Spin</button>
+  <div id="result"></div>
+
+  <script>
+    document.getElementById('spin-button').addEventListener('click', spinWheel);
+
+    function spinWheel() {
+      var ingredients = [
+        "Eggs", "Milk", "Flour", "Sugar", "Butter", "Chicken breasts",
+        "Garlic", "Tomatoes", "Onions", "Lemon", "Avocado", "Spinach",
+        "Apples", "Bananas", "Strawberries"
+      ];
+
+      var spinner = document.getElementById('spinner');
+      var resultText = document.getElementById('result');
+
+      // Disable button during the spin
+      document.getElementById('spin-button').disabled = true;
+
+      // Randomly select an ingredient
+      var randomIndex = Math.floor(Math.random() * ingredients.length);
+      var selectedIngredient = ingredients[randomIndex];
+
+      // Calculate rotation angle
+      var rotation = 360 * 4 + randomIndex * (360 / ingredients.length);
+
+      // Apply the rotation
+      spinner.style.transform = 'rotate(' + rotation + 'deg)';
+
+      // Wait for the spin animation to finish
+      setTimeout(function () {
+        // Enable the button again
+        document.getElementById('spin-button').disabled = false;
+
+        // Display the selected ingredient
+        resultText.innerHTML = "You got: " + selectedIngredient;
+      }, 4000);
+    }
+  </script>
+</body>
+</html>
